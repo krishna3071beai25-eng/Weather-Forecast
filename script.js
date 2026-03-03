@@ -1,4 +1,4 @@
-const API_KEY = 'ddacc8c36bb5bbee4618aca8cfd35c27'; 
+const API_KEY = 'abcd123.......'; 
 const BASE_URL = 'https://api.openweathermap.org/data/2.5';
 
 // --- State Management ---
@@ -325,5 +325,6 @@ const renderHistory = () => {
         ui.historyDropdown.appendChild(li);
     });
 };
+
 
 init();
