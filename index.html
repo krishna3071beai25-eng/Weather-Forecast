@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather Predictor</title>
+    
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <script src="https://cdn.jsdelivr.net/npm/chart.js" defer></script>
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" defer></script>
+    <script src="script.js" defer></script> 
+</head>
+<body>
+    
+    <div class="background-mesh" id="bg-container"></div>
+
+    <main class="app-container glass-panel">
+        <header class="app-header">
+            <div class="search-group">
+                <button id="locate-btn" title="Use My Location" class="icon-btn">
+                    <i class="fas fa-location-crosshairs"></i>
+                </button>
+                <div class="search-input-wrapper">
+                    <input type="text" id="search-input" placeholder="Search city..." autocomplete="off">
+                    <ul class="history-dropdown glass-panel hidden" id="history-dropdown"></ul>
+                </div>
+                <button id="search-btn" class="icon-btn"><i class="fas fa-magnifying-glass"></i></button>
+            </div>
+            <div class="controls-group">
+                <button id="unit-toggle" class="glass-toggle"><strong>°C</strong> | °F</button>
+            </div>
+        </header>
+
+        <div id="loader" class="loader-container hidden">
+            <div class="modern-spinner"></div>
+            <p>Fetching atmosphere data...</p>
+        </div>
+        
+        <div id="error-msg" class="alert-box hidden" role="alert"></div>
+
+        <article id="weather-dashboard" class="dashboard hidden">
+            
+            <section class="hero-weather">
+                <div class="location-info">
+                    <h1 id="city-name">--</h1>
+                    <time id="date-time">--</time>
+                </div>
+                <div class="temp-display">
+                    <img id="weather-icon" src="" alt="Condition icon" fetchpriority="high">
+                    <div class="temp-data">
+                        <h2 id="temperature">--</h2>
+                        <span id="description" class="badge">--</span>
+                    </div>
+                </div>
+            </section>
+
+            <section class="hourly-section glass-panel">
+                <h3><i class="far fa-clock"></i> 24-Hour Forecast</h3>
+                <div class="hourly-scroll" id="hourly-container">
+                    </div>
+            </section>
+
+            <section class="metrics-grid">
+                <div class="metric-card glass-panel"><i class="fas fa-wind"></i><div class="metric-info"><span>Wind</span><strong id="wind-speed">--</strong></div></div>
+                <div class="metric-card glass-panel"><i class="fas fa-droplet"></i><div class="metric-info"><span>Humidity</span><strong id="humidity">--</strong></div></div>
+                <div class="metric-card glass-panel"><i class="fas fa-lungs"></i><div class="metric-info"><span>Air Quality</span><strong id="aqi">--</strong></div></div>
+                <div class="metric-card glass-panel"><i class="fas fa-temperature-half"></i><div class="metric-info"><span>Feels Like</span><strong id="feels-like">--</strong></div></div>
+                <div class="metric-card glass-panel"><i class="fas fa-eye"></i><div class="metric-info"><span>Visibility</span><strong id="visibility">--</strong></div></div>
+                <div class="metric-card glass-panel"><i class="fas fa-arrow-down-up-across-line"></i><div class="metric-info"><span>Pressure</span><strong id="pressure">--</strong></div></div>
+                <div class="metric-card glass-panel"><i class="fas fa-sunrise"></i><div class="metric-info"><span>Sunrise</span><strong id="sunrise">--</strong></div></div>
+                <div class="metric-card glass-panel"><i class="fas fa-sunset"></i><div class="metric-info"><span>Sunset</span><strong id="sunset">--</strong></div></div>
+            </section>
+
+            <div class="grid-2-col">
+                <section class="chart-section glass-panel">
+                    <h3><i class="fas fa-chart-line"></i> Temperature & Rain Trends</h3>
+                    <div class="chart-container">
+                        <canvas id="weatherChart"></canvas>
+                    </div>
+                </section>
+
+                <section class="forecast-section glass-panel">
+                    <h3><i class="far fa-calendar-alt"></i> 5-Day Outlook</h3>
+                    <div class="forecast-track" id="forecast-container"></div>
+                </section>
+            </div>
+
+            <section class="map-section glass-panel">
+                <h3><i class="fas fa-satellite-dish"></i> Live Precipitation Radar</h3>
+                <div id="weather-map"></div>
+            </section>
+
+        </article>
+    </main>
+</body>
+</html>
